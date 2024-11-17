@@ -14,8 +14,6 @@ from flask import Flask, render_template, request, session, url_for, redirect, f
 from flask_cors import CORS, cross_origin
 import jinja2
 
-import pretty_midi
-from pretty_midi import constants
 import soundfile as sf
 from scipy.io.wavfile import write
 
