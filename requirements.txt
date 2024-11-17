@@ -1,7 +1,6 @@
 Flask==1.1.4
 Flask_Cors==3.0.10
 numpy==1.19.3
-pretty_midi==0.2.8
 jinja2==2.11.2
 gunicorn==19.9.0
 MarkupSafe==2.0.1
