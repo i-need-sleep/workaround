@@ -47,7 +47,7 @@ def audio(path):
 
     # Write the audio to a buffer
     global count
-    idx = count % 10
+    idx = count % 50
     count += 1
     sf.write(f'./{idx}.wav', np.array(data, dtype=float), int(samplerate), format='WAV')
     
