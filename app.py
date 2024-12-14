@@ -35,7 +35,7 @@ def index():
 # For example, /audio/test/test.mp3 will play the audio file test.mp3 in the folder test
 count = 0
 @app.route('/sdb_audio/<path:path>', methods=['GET'])
-def audio(path):
+def sdb_audio(path):
     # Fetch the audio from 128.2.204.47:8001
     url = f'http://128.2.204.47:8001/{path}'
     print(f'Fetching audio from {url}')
@@ -57,7 +57,7 @@ def audio(path):
 
 count_data = 0
 @app.route('/data_audio/<path:path>', methods=['GET'])
-def audio(path):
+def data_audio(path):
     # Fetch the audio from 128.2.204.47:8002
     url = f'http://128.2.204.47:8002/{path}'
     print(f'Fetching audio from {url}')
