@@ -47,7 +47,7 @@ def sdb_audio(path):
 
     # Write the audio to a buffer
     global count
-    idx = count % 50
+    idx = count % 100
     count += 1
     sf.write(f'./sdb_{idx}.wav', np.array(data, dtype=float), int(samplerate), format='WAV')
     
@@ -69,7 +69,7 @@ def data_audio(path):
 
     # Write the audio to a buffer
     global count_data
-    idx = count_data % 50
+    idx = count_data % 100
     count_data += 1
     sf.write(f'./data_{idx}.wav', np.array(data, dtype=float), int(samplerate), format='WAV')
     
