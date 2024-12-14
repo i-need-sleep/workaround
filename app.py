@@ -34,7 +34,7 @@ def index():
 # Such that the audio is played on the client side
 # For example, /audio/test/test.mp3 will play the audio file test.mp3 in the folder test
 count = 0
-@app.route('/audio/<path:path>', methods=['GET'])
+@app.route('/sdb_audio/<path:path>', methods=['GET'])
 def audio(path):
     # Fetch the audio from 128.2.204.47:8001
     url = f'http://128.2.204.47:8001/{path}'
@@ -49,10 +49,32 @@ def audio(path):
     global count
     idx = count % 50
     count += 1
-    sf.write(f'./{idx}.wav', np.array(data, dtype=float), int(samplerate), format='WAV')
+    sf.write(f'./sdb_{idx}.wav', np.array(data, dtype=float), int(samplerate), format='WAV')
     
     # Return the audio file
-    return send_file(f'./{idx}.wav', as_attachment=True)
+    return send_file(f'./sdb_{idx}.wav', as_attachment=True)
+
+
+count_data = 0
+@app.route('/data_audio/<path:path>', methods=['GET'])
+def audio(path):
+    # Fetch the audio from 128.2.204.47:8002
+    url = f'http://128.2.204.47:8002/{path}'
+    print(f'Fetching audio from {url}')
+    response = requests.get(url)
+    response.raise_for_status()  # Raise an exception if download fails
+
+    with io.BytesIO(response.content) as f:
+        data, samplerate = sf.read(f)
+
+    # Write the audio to a buffer
+    global count_data
+    idx = count_data % 50
+    count_data += 1
+    sf.write(f'./data_{idx}.wav', np.array(data, dtype=float), int(samplerate), format='WAV')
+    
+    # Return the audio file
+    return send_file(f'./data_{idx}.wav', as_attachment=True)
 
 
 if __name__ == '__main__':
