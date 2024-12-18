@@ -68,9 +68,9 @@ def data_audio(path):
     # Return the audio file
     return send_file(f'./data_{path}.wav', as_attachment=True)
 
-@app.route('/<path:path>')
+@app.route('/assets/<path:path>')
 def serve_static(path):
-    return send_from_directory(app.static_folder, path)
+    return send_from_directory(app.static_folder, f'assets/{path}')
 
 if __name__ == '__main__':
     # threading.Timer(1.25, lambda: webbrowser.open("http://127.0.0.1:5000/", new=0, autoraise=True) ).start()
