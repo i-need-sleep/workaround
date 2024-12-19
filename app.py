@@ -45,10 +45,11 @@ def sdb_audio(path):
         data, samplerate = sf.read(f)
 
     # Write the audio to a buffer
-    sf.write(f'./sdb_{path}.wav', np.array(data, dtype=float), int(samplerate), format='WAV')
+    save_path = f'./sdb_{path.replace("/", "_")}'
+    sf.write(save_path, np.array(data, dtype=float), int(samplerate), format='WAV')
     
     # Return the audio file
-    return send_file(f'./sdb_{path}.wav', as_attachment=True)
+    return send_file(save_path, as_attachment=True)
 
 
 @app.route('/data_audio/<path:path>', methods=['GET'])
@@ -63,10 +64,11 @@ def data_audio(path):
         data, samplerate = sf.read(f)
 
     # Write the audio to a buffer
-    sf.write(f'./data_{path}.wav', np.array(data, dtype=float), int(samplerate), format='WAV')
+    save_path = f'./data_{path.replace("/", "_")}'
+    sf.write(save_path, np.array(data, dtype=float), int(samplerate), format='WAV')
     
     # Return the audio file
-    return send_file(f'./data_{path}.wav', as_attachment=True)
+    return send_file(save_path, as_attachment=True)
 
 @app.route('/assets/<path:path>')
 def serve_static(path):

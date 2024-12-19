@@ -31,7 +31,7 @@
       <div v-if="(system !== 'prompt') && (system !== 'musiccaps_prompt_id')">
         <p>{{ system }}</p>
         <audio controls :key="prompt_id" preload="none">
-          <source :key="prompt_id" :src="'https://humanratings-6207bc1e725a.herokuapp.com/'+metadata[prompt_id][system][0]" type="audio/wav">
+          <source :key="prompt_id" :src="'/'+metadata[prompt_id][system][0]" type="audio/wav">
           Your browser does not support the audio element.
         </audio>
       </div>
@@ -47,7 +47,7 @@
     </select>
     <div v-for="url in metadata[prompt_id][system]" :key="url">
       <audio controls :key="url" preload="none">
-        <source :key="url" :src="'https://humanratings-6207bc1e725a.herokuapp.com/'+url" type="audio/wav">
+        <source :key="url" :src="'/'+url" type="audio/wav">
         Your browser does not support the audio element.
       </audio>
     </div>
