@@ -4,3 +4,6 @@ hst-performance/node_modules
 processing/POP909-Dataset-master
 processing/resolved_909
 processing/samples_out
+
+*.mp3
+*.wav
