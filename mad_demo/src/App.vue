@@ -64,7 +64,9 @@
   <div class="grid-container_4">
 
     <div class="grid-container-sub" v-for="distortion_type in ['Fidelity', 'Musicality', 'Context', 'Diversity']" :key="distortion_type">
-      <b class="audio_col_label">{{ distortion_type }}</b>
+      <b class="audio_col_label">{{ distortion_type }}
+        <span v-if="distortion_type == 'Diversity'">*</span>
+      </b>
 
       <div v-for="distortion_idx in Array(synth_n_levels).keys()" :key="distortion_idx">
 
@@ -79,6 +81,8 @@
     </div>
 
   </div>
+  
+  <p>* Diversity is defined on a population level, not an instance level. Accordingly, it will be more difficult to ascertain changes in diversity from these sound examples compared to the other three desiderata. We include them for completeness.</p>
 
   <!-- MusicPrefs: Human data -->
   <h1>MusicPrefs: Human Preferences for Text-to-Music Generation</h1>
@@ -122,7 +126,8 @@
   <p v-if="!musicprefs_hide_annotation">
     Human preference: <br>
     <b>Fidelity:</b> {{ get_musicprefs_fidelity() }} <br>
-    <b>Musicality:</b> {{ get_musicprefs_musicality() }}
+    <b>Musicality:</b> {{ get_musicprefs_musicality() }} <br>
+    <b>Prompt</b>(not shown to annotators)<b>:</b> {{ get_musicprefs_prompt() }}
   </p>
 
   <!-- MusicPrefs: More generated data -->
@@ -284,22 +289,25 @@ export default {
     },
 
     get_musicprefs_url_a() {
-      return musicprefs_metadata[this.musicprefs_idx + 3]["audio_a_url"]
+      return musicprefs_metadata[this.musicprefs_idx]["audio_a_url"]
     },
     get_musicprefs_url_b() {
-      return musicprefs_metadata[this.musicprefs_idx + 3]["audio_b_url"]
+      return musicprefs_metadata[this.musicprefs_idx]["audio_b_url"]
     },
     get_musicprefs_system_a() {
-      return this.model_names_reformat[musicprefs_metadata[this.musicprefs_idx + 3]["system_a"]]
+      return this.model_names_reformat[musicprefs_metadata[this.musicprefs_idx]["system_a"]]
     },
     get_musicprefs_system_b() {
-      return this.model_names_reformat[musicprefs_metadata[this.musicprefs_idx + 3]["system_b"]]
+      return this.model_names_reformat[musicprefs_metadata[this.musicprefs_idx]["system_b"]]
     },
     get_musicprefs_fidelity() {
-      return ["System A", "Tie", "System B"][musicprefs_metadata[this.musicprefs_idx + 3]["fidelity"]]
+      return ["System A", "Tie", "System B"][musicprefs_metadata[this.musicprefs_idx]["fidelity"]]
     },
     get_musicprefs_musicality() {
-      return ["System A", "Tie", "System B"][musicprefs_metadata[this.musicprefs_idx + 3]["musicality"]]
+      return ["System A", "Tie", "System B"][musicprefs_metadata[this.musicprefs_idx]["musicality"]]
+    },
+    get_musicprefs_prompt() {
+      return musicprefs_metadata[this.musicprefs_idx]["prompt"]
     },
 
 
